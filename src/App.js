@@ -10,19 +10,19 @@ const particlesConfig = {
 particles: {
   number: {
     value: 90,
-            			line_linked: {
-            				shadow: {
-            					enable: true,
-            					color: "#3CA9D1",
-            					blur: 5
-            				}
-            			}
-                }
-                }
+      line_linked: {
+        shadow: {
+          enable: true,
+          color: "#3CA9D1",
+    		  blur: 5
+          }
+    }
+  }
+ }
 }
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       input: ''
