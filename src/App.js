@@ -31,28 +31,61 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: ''
+      input: '',
+      imageUrl: '',
+      box: {},
+      route: 'signin',
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     }
   }
 
-  onInputChange = (event) => {
-    console.log(event.target.value)
+  // calculateFaceLocation = (data) => {
+  //   const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+  //   const image = document.getElementById('inputimage');
+  //   const width = Number(image.width);
+  //   const height = Number(image.height);
+  //   return {
+  //     leftCol: clarifaiFace.left_col * width,
+  //     topRow: clarifaiFace.top_row * height,
+  //     rightCol: width - (clarifaiFace.right_col * width),
+  //     bottomRow: height - (clarifaiFace.bottom_row * height)
+  //   }
+  // }
+
+    onInputChange = (event) => {
+    this.setState({input: event.target.value});
   }
 
   onButtonSubmit = () => {
-    console.log('click have been pressed');
+    this.setState({imageUrl: this.state.input});
     app.models
-      .initModel({
-        id: Clarifai.FACE_DETECT_MODEL,
+      .predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
+      .then(response => {
+        console.log('hi', response)
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, { entries: count}))
+            })
+
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response))
       })
-      .then((faceDetectModel) => {
-        return faceDetectModel.predict(
-          "https://media.allure.com/photos/5ea70894ad6aae0008773b2d/1:1/w_1763,h_1763,c_limit/51faces-Social.jpg"
-        );
-      })
-      .then((response) => {
-        console.log(response);
-      });
+      .catch(err => console.log(err));
   }
   
   render() {
@@ -66,7 +99,7 @@ class App extends Component {
         <ImageLinkForm 
           onInputChange= {this.onInputChange} 
           onButtonSubmit={this.onButtonSubmit}/>
-        {<FaceRecognition />}
+        {<FaceRecognition imageURL={this.state.imageURL } />}
       </div>
     );
   }
