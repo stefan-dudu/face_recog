@@ -3,6 +3,7 @@ import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/Navigation/Navigation';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
@@ -34,7 +35,8 @@ class App extends Component {
       input:'',
       imageUrl: '',
       box: {},
-      route: 'SignIn'
+      route: 'SignIn',
+      isSignedIn: false
     }
   }
  
@@ -85,22 +87,37 @@ onButtonSubmit = () => {
   }
 
   onRouteChange = (route) => {
+    if (route === 'signout') {
+      this.setState({isSignedIn: false})
+    } else if (route === 'home') {
+      this.setState({isSignedIn: true})
+    }
     this.setState({route: route});
   }
 
   render() {
+    const {isSignedIn, route, imageUrl, box} = this.state;
   return (
     <div className="App">
     <Particles className='particles'params={particlesOptions}/>
-    <Navigation onRouteChange = {this.onRouteChange}/>
-    { this.state.route === 'SignIn' 
-      ? <SignIn onRouteChange = {this.onRouteChange}/>
-      : <div>
+    <Navigation isSignedIn={isSignedIn} onRouteChange = {this.onRouteChange}/>
+    {route === 'home' 
+    //if this.state.route is home display home items
+      ? <div>
           <Logo />
           <Rank/>
-          <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/> 
-          <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+          <ImageLinkForm 
+            onInputChange={this.onInputChange} 
+            onButtonSubmit={this.onButtonSubmit}
+            /> 
+          <FaceRecognition box={box} imageUrl={imageUrl} />
         </div>
+    //else display this - register forum
+      :(
+        route === 'SignIn' 
+        ? <SignIn onRouteChange = {this.onRouteChange}/>
+        : <Register onRouteChange = {this.onRouteChange}/> 
+      )
       }
     </div>
   );
