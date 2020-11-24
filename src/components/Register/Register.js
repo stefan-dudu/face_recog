@@ -21,10 +21,10 @@ const Register = ({onRouteChange}) => {
         <input className="b pa2 input-reset ba bg-transparent hover-bg-gray hover-white w-100" type="password" name="password"  id="password" />
       </div>
     </fieldset>
-    <div classNameName="">
+    <div className="">
       <input 
         onClick={() => onRouteChange('home')}
-        classNameName="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
         type="submit" 
         value="Register" />
     </div>
