@@ -41,8 +41,7 @@ class App extends Component {
         id:'',
         name: '',
         email: '',
-        password: '',
-        entries: 0,
+        entriess: 0,
         joined: '' 
       }
     }
@@ -54,7 +53,7 @@ class App extends Component {
       name: data.name,
       email: data.email,
       password: data.password,
-      entries: data.entries,
+      entriess: data.entriess,
       joined: data.joined
     }})
   }
@@ -97,7 +96,7 @@ onButtonSubmit = () => {
           })
             .then(response => response.json())
             .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count}))
+              this.setState(Object.assign(this.state.user, { entriess: count}))
             })
 
         }
@@ -125,7 +124,7 @@ onButtonSubmit = () => {
     //if this.state.route is home display home items
       ? <div>
           <Logo />
-          <Rank/>
+          <Rank name={this.state.user.name} entriess={this.state.user.entriess} />
           <ImageLinkForm 
             onInputChange={this.onInputChange} 
             onButtonSubmit={this.onButtonSubmit}
@@ -135,7 +134,7 @@ onButtonSubmit = () => {
     //else display this - register forum
       :(
         route === 'SignIn' 
-        ? <SignIn onRouteChange = {this.onRouteChange}/>
+        ? <SignIn loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>
         : <Register loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> 
       )
       }
