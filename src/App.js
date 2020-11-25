@@ -90,15 +90,14 @@ onButtonSubmit = () => {
           fetch('http://localhost:3000/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
-            // body: JSON.stringify({
-            //   id: this.state.user.id
-            // })
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
           })
             .then(response => response.json())
             .then(count => {
               this.setState(Object.assign(this.state.user, { entriess: count}))
             })
-
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -124,7 +123,9 @@ onButtonSubmit = () => {
     //if this.state.route is home display home items
       ? <div>
           <Logo />
-          <Rank name={this.state.user.name} entriess={this.state.user.entriess} />
+          <Rank 
+            name={this.state.user.name} 
+            entriess={this.state.user.entriess} />
           <ImageLinkForm 
             onInputChange={this.onInputChange} 
             onButtonSubmit={this.onButtonSubmit}
