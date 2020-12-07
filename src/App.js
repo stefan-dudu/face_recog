@@ -135,7 +135,7 @@ onButtonSubmit = () => {
       :(
         route === 'SignIn' 
         ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-        : <Rank name={this.state.user.name} entries={this.state.user.entries}/> 
+        : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> 
       )
       }
     </div>
