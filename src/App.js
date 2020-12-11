@@ -28,10 +28,7 @@ particles: {
  }
 }
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state={
+const initalState = {
       input:'',
       imageUrl: '',
       box: {},
@@ -45,6 +42,11 @@ class App extends Component {
         joined: ''
       }
     }
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state= initalState;
   }
 
   loadUser = (data) => {
@@ -98,7 +100,7 @@ onButtonSubmit = () => {
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count}))
             })
-
+            .catch(console.log)
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -107,7 +109,7 @@ onButtonSubmit = () => {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false})
+      this.setState(initalState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
@@ -124,7 +126,10 @@ onButtonSubmit = () => {
     //if this.state.route is home display home items
       ? <div>
           <Logo />
-          <Rank/>
+          <Rank
+            name={this.state.user.name}
+            entries={this.state.user.entries}  
+          />
           <ImageLinkForm 
             onInputChange={this.onInputChange} 
             onButtonSubmit={this.onButtonSubmit}
