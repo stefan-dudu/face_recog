@@ -2,7 +2,6 @@ import React from 'react';
 
 
 class Register extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -25,8 +24,6 @@ class Register extends React.Component {
   }
 
   onSubmitSignIn = () => {
-
-    // https://mysterious-falls-75292.herokuapp.com/
     fetch('https://mysterious-falls-75292.herokuapp.com/register', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -38,7 +35,7 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(user => {
-        if (user) {
+        if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
         } 
