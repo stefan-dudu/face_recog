@@ -10,9 +10,9 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Rank from './components/Rank/Rank';
 import './App.css';
  
-const app = new Clarifai.App({
-  apiKey: '1ec4031a38cb43d1bb99d5eed1740991'
- });
+// const app = new Clarifai.App({
+//   apiKey: '1ec4031a38cb43d1bb99d5eed1740991'
+//  });
 const particlesOptions = {
 particles: {
   number: {
@@ -84,11 +84,15 @@ class App extends Component {
   
 onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    app.models.predict(Clarifai.FACE_DETECT_MODEL,
-        this.state.input)
-
-        
-
+    // app.models.predict(Clarifai.FACE_DETECT_MODEL,
+    //     this.state.input)
+      fetch('https://mysterious-falls-75292.herokuapp.com/imageurl',{
+        method: 'post',
+        headers : {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
       .then(response => {
         console.log('hi', response)
         if (response) {
