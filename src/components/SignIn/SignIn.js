@@ -77,8 +77,8 @@ class SignIn extends React.Component {
             className="f6 link dim black db pointer">Register now !</p>
           </div>
         </div>
-        </main>
-        </article>
+      </main>
+    </article>
   );
   }
 
