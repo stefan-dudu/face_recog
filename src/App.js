@@ -9,17 +9,17 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
-const particlesOptions = {
-  particles: {
-    number: {
-      value: 40,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    }
-  }
-}
+// const particlesOptions = {
+//   particles: {
+//     number: {
+//       value: 40,
+//       density: {
+//         enable: true,
+//         value_area: 800
+//       }
+//     }
+//   }
+// }
 
 const initialState = {
   input: '',
@@ -117,9 +117,9 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
-         <Particles className='particles'
+         {/* <Particles className='particles'
           params={particlesOptions}
-        />
+        /> */}
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
         { route === 'home'
           ? <div>
