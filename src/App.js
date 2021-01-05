@@ -12,9 +12,9 @@ import './App.css';
 const particlesOptions = {
 	    particles: {
 	        number: {
-	            value: 160,
+	            value: 300,
 	            density: {
-	                enable: false
+	                enable: true
 	            }
 	        },
 	        size: {
@@ -39,7 +39,7 @@ const particlesOptions = {
 	        events: {
 	            onhover: {
 	                enable: true,
-	                mode: "bubble"
+	                mode: "repulse"
 	            },
 	            onclick: {
 	                enable: true,
