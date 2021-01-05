@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Face Recognition AI",
+  "name": "Creates a simple Face Recognition App using AI",
   "icons": [
     {
       "src": "favicon.ico",
