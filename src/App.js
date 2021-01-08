@@ -48,13 +48,13 @@ const particlesOptions = {
 	        },
 	        modes: {
 	            bubble: {
-	                distance: 250,
+	                distance: 50,
 	                duration: 2,
 	                size: 0,
 	                opacity: 0
 	            },
 	            repulse: {
-	                distance: 400,
+	                distance: 100,
 	                duration: 4
 	            }
 	        }
